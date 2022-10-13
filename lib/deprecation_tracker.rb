@@ -199,7 +199,7 @@ class DeprecationTracker
   # Normalize deprecation messages to reduce noise from file output and test files to be tracked with separate test runs
   def normalized_deprecation_messages
     normalized = read_shitlist.merge(deprecation_messages).each_with_object({}) do |(bucket, messages), hash|
-      hash[bucket] = messages.sort
+      hash[bucket] = messages.select { |x| x.is_a? String }.sort
     end
 
     # not using `to_h` here to support older ruby versions
